@@ -214,23 +214,25 @@
                 justify-content: center;
                 align-items: center;
             `,
-            B: `
-                background: #b55900;
-                color: #fff;
-            `,
-            A: `
-                background: #3d4856;
-                color: #fff;
-            `,
-            P: `
-                background: #3c86c3;
-            `,
-            M: `
-                background: #8e7ec0;
-            `,
-            Z: `
-                background: #cd4227;
-            `,
+            userModesChildren: [
+                `
+                    background: #b55900;
+                    color: #fff;
+                `, 
+                `
+                    background: #3d4856;
+                    color: #fff;
+                `,
+                `
+                    background: #3c86c3;
+                `, 
+                `
+                    background: #8e7ec0;
+                `,
+                `
+                    background: #cd4227;
+                `,   
+            ],
             userGames: `
                 background: #cdcd6f;
             `,
@@ -246,11 +248,15 @@
             <div style="${styles.userChild.concat(styles.userName)}">Ник</div>
             <div style="${styles.userChild.concat(styles.userId)}">id</div>
             <div style="${styles.userChild.concat(styles.userModes)}">
-                <div style="${styles.userMode.concat(styles.B)}">Б</div>
-                <div style="${styles.userMode.concat(styles.A)}">А</div>
-                <div style="${styles.userMode.concat(styles.P)}">П+</div>
-                <div style="${styles.userMode.concat(styles.M)}">М+</div>
-                <div style="${styles.userMode.concat(styles.Z)}">З</div>
+                ${
+                    Object.keys(modes).map((mode, idx) => {
+                        let style = styles.userMode;
+                        let uniqStyle = styles.userModesChildren[idx];
+                        if (uniqStyle) style = style.concat(uniqStyle);
+
+                        return `<div style="${style}">${mode.slice(0, 1)}</div>`
+                    }).join('')
+                }
             </div>
             <div style="${styles.userChild.concat(styles.userGames)}">Заезды</div>
             <div style="${styles.userChild.concat(styles.userPoints)}">Очки</div>
@@ -263,11 +269,15 @@
             <div style="${styles.userChild.concat(styles.userName)}">Итого</div>
             <div style="${styles.userChild.concat(styles.userId)}"></div>
             <div style="${styles.userChild.concat(styles.userModes)}">
-                <div style="${styles.userMode.concat(styles.B)}">${total.modes?.['Буквы']}</div>
-                <div style="${styles.userMode.concat(styles.A)}">${total.modes?.['Абракадабра']}</div>
-                <div style="${styles.userMode.concat(styles.P)}">${total.modes?.['Периферия+']}</div>
-                <div style="${styles.userMode.concat(styles.M)}">${total.modes?.['Мизинцы+']}</div>
-                <div style="${styles.userMode.concat(styles.Z)}">${total.modes?.['Забористый']}</div>
+                ${
+                    Object.keys(modes).map((mode, idx) => {
+                        let style = styles.userMode;
+                        let uniqStyle = styles.userModesChildren[idx];
+                        if (uniqStyle) style = style.concat(uniqStyle);
+
+                        return `<div style="${style}">${total.modes[mode]}</div>`
+                    }).join('')
+                }
             </div>
             <div style="${styles.userChild.concat(styles.userGames)}">${total.games}</div>
             <div style="${styles.userChild.concat(styles.userPoints)}">${total.points}</div>
@@ -292,11 +302,15 @@
                 <div style="${styles.userChild.concat(styles.userName)}">${user.nickname}</div>
                 <div style="${styles.userChild.concat(styles.userId)}">${user.id}</div>
                 <div style="${styles.userChild.concat(styles.userModes)}">
-                    <div style="${styles.userMode.concat(styles.B)}">${user.games === 0 ? error : user.modes?.['Буквы']}</div>
-                    <div style="${styles.userMode.concat(styles.A)}">${user.games === 0 ? error : user.modes?.['Абракадабра']}</div>
-                    <div style="${styles.userMode.concat(styles.P)}">${user.games === 0 ? error : user.modes?.['Периферия+']}</div>
-                    <div style="${styles.userMode.concat(styles.M)}">${user.games === 0 ? error : user.modes?.['Мизинцы+']}</div>
-                    <div style="${styles.userMode.concat(styles.Z)}">${user.games === 0 ? error : user.modes?.['Забористый']}</div>
+                    ${
+                        Object.keys(modes).map((mode, idx) => {
+                            let style = styles.userMode;
+                            let uniqStyle = styles.userModesChildren[idx];
+                            if (uniqStyle) style = style.concat(uniqStyle);
+                        
+                            return `<div style="${style}">${user.games === 0 ? error : user.modes?.[mode]}</div>`
+                        }).join('')
+                    }
                 </div>
                 <div style="${styles.userChild.concat(styles.userGames)}">${user.games || error}</div>
                 <div style="${styles.userChild.concat(styles.userPoints)}">${user.points || error}</div>
