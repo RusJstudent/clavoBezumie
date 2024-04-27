@@ -15,12 +15,52 @@
         'Забористый': 1.3,
         'Мизинцы+': 1.3,
     };
+
+    const knownParticipants = {
+        '-Advanced-': {id: '486008'},
+        '-IL-': {id: '256825'},
+        'ASplayer9119': {id: '397953'},
+        'ITur': {id: '674033'},
+        'InsydeR': {id: '136776'},
+        'Kenichi': {id: '211962'},
+        'KinDK': {id: '181346'},
+        'Maxonik': {id: '315389'},
+        'NEsanych': {id: '253584'},
+        'Satory': {id: '439322'},
+        'Speedyman': {id: '117729'},
+        'Supersonic': {id: '127875'},
+        'Tatsi_3006': {id: '572286'},
+        'andddrey': {id: '310598'},
+        'libertadore': {id: '1625'},
+        'merely': {id: '580052'},
+        'milkmark': {id: '541830'},
+        'nekit_1904': {id: '501294'},
+        'ofirinka': {id: '441210'},
+        'plytishka': {id: '567393'},
+        'sashavirtual': {id: '739674'},
+        'trhlAHAHsfjJ': {id: '749254'},
+        'un4given': {id: '111001'},
+        'vnest': {id: '627771'},
+        'zewz': {id: '493131'},
+        'Александр88': {id: '107860'},
+        'Бэтмен': {id: '195256'},
+        'Диктатор': {id: '445193'},
+        'Лазер': {id: '563183'},
+        'Примус_починяю': {id: '542059'},
+        'Сима44': {id: '471178'},
+        'Эльдарр': {id: '656049'},
+        'отпросился': {id: '630239'},
+        '_Mira_': {id: '320816'},
+        '__Anastasia__': {id: '568255'},
+        'gevis': {id: '480963'},
+    };
     
     getActiveUsers(modes)
         .then(parseData)
         .then(showResults);
     
     function getActiveUsers(modes) {
+        if (options.knownOnly) return Promise.resolve(knownParticipants);
         const users = {};
         const modePromises = Object.entries(modes).map( mode => addWeeklyTopPlayers(mode[1]) );
     
@@ -331,4 +371,4 @@
             document.removeEventListener('click', handleClick);
         }
     }
-})({creditedOnly: true});
+})({creditedOnly: false, knownOnly: true});
