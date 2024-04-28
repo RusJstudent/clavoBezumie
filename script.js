@@ -53,6 +53,13 @@
         '_Mira_': {id: '320816'},
         '__Anastasia__': {id: '568255'},
         'gevis': {id: '480963'},
+        'oves': {id: '428373'},
+        'KiberBot': {id: '741384'},
+        'faithful-': {id: '691004'},
+        'vIRwO': {id: '314458'},
+        'Waleria': {id: '155693'},
+        'VQV': {id: '477232'},
+        'carmero': {id: '253427'},
     };
     
     getActiveUsers(modes)
